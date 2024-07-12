@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="ivm"
+            type="ww.smartexpress.driver.data.model.api.response.DriverServiceResponse" />
+        <variable
+            name="i"
+            type="Long" />
+        <import type="android.view.View"></import>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_5sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp">
+            <LinearLayout
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@{ivm.service.image}"/>
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        style="@style/app_text_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@{ivm.service.name}" />
+                    <TextView
+                        style="@style/app_text_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@{String.valueOf(ivm.ratioShare)+'%'}" />
+                </LinearLayout>
+
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/switchState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{ivm.state == 0? Boolean.FALSE : Boolean.TRUE}"
+                    app:kswBackColor="@color/switch_track"
+                    app:kswThumbColor="@color/switch_thumb"
+                    app:kswThumbHeight="@dimen/_10sdp"
+                    app:kswThumbMarginLeft="@dimen/_5sdp"
+                    app:kswThumbWidth="@dimen/_10sdp">
+                </com.kyleduo.switchbutton.SwitchButton>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/_1sdp"-->
+<!--            android:layout_gravity="bottom"-->
+<!--            android:background="@drawable/background_underline"-->
+<!--            android:visibility="@{i==ivm.id?View.GONE:View.VISIBLE}"/>-->
+    </FrameLayout>
+</layout>

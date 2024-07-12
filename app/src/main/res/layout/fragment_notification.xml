@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="f"
+            type="ww.smartexpress.driver.ui.fragment.notification.NotificationFragment" />
+        <variable
+            name="vm"
+            type="ww.smartexpress.driver.ui.fragment.notification.NotificationFragmentViewModel" />
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils" />
+
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_app">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/app_text_big"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:text="@string/notification_header"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:visibility="@{vm.totalUnread == null || vm.totalUnread==0 ? View.GONE : View.VISIBLE}"
+                        style="@style/app_text_big"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:text='@{"("+vm.totalUnread+")"}'
+                        android:textSize="@dimen/_16ssp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/red_color"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/readAll"
+                    style="@style/text_style_montserrat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:text="Đánh dấu tất cả đã đọc"
+                    android:textColor="@color/green_light_app" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:background="@color/bg_app"
+                    android:id="@+id/rcNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:clipToPadding="false">
+
+                </androidx.recyclerview.widget.RecyclerView>
+                <include layout="@layout/item_transaction_empty"
+                    android:visibility="@{vm.mFlexibleAdapter != null &amp;&amp; vm.mFlexibleAdapter.getItemCount()>0 ? View.GONE : View.VISIBLE}"
+                    android:id="@+id/layout_empty"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent" />
+            </LinearLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </FrameLayout>
+</layout>
